@@ -1,0 +1,6 @@
+[
+    {
+    "key": "ctrl+alt+a",
+    "command": "settings.cycle.copilot"
+}
+]

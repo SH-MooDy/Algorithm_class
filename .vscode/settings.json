@@ -9,5 +9,19 @@
         "iosfwd": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
-    "terminal.integrated.scrollback": 10000  // 추가된 항목
+    "terminal.integrated.scrollback": 10000,  // 추가된 항목
+
+    "settings.cycle": [
+        {
+        "id": "copilot",
+          "overrideWorkspaceSettings": true,
+          "values": [{
+            "github.copilot.inlineSuggest.enable": false
+          },
+          {
+            "github.copilot.inlineSuggest.enable": true
+          }
+       ]},
+    ],
 }
+
