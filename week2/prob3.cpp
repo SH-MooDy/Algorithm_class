@@ -1,11 +1,10 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_N = 16;
+const int MAX = 16;
 int N, K, count = 0;
-;
-int maze[MAX_N][MAX_N];
-bool visited[MAX_N][MAX_N];
+int maze[MAX][MAX];
+bool visited[MAX][MAX];
 int dx[4] = {1, -1, 0, 0};
 int dy[4] = {0, 0, 1, -1};
 
