@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int const PATHWAY = 0;  // 이동 가능한 공간
+int const PATHWAY = 0;  // 통로
 int const WALL = 1;     // 벽
 int const BOMB = 2;     // 폭탄
 int const VISITED = 3;  // 방문한 길

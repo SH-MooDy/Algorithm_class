@@ -3,7 +3,7 @@ using namespace std;
 
 const int PATHWAY = 0;  // 이동 가능한 공간
 const int WALL = 1;     // 벽
-const int VISITED = 2;  // 방문한 길길
+const int VISITED = 2;  // 방문한 길
 
 int N, K, count = 0;
 int maze[16][16];
@@ -44,7 +44,7 @@ void findPath(int x, int y, int length) {
     }
   }
 
-  // 방문 해제제
+  // 방문 해제
   maze[x][y] = PATHWAY;
 }
 
