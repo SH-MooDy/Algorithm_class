@@ -1,12 +1,13 @@
 #include <iostream>
 using namespace std;
 
-const int MAX = 16;
+const int PATHWAY = 0;  // 이동 가능한 공간
+const int WALL = 1;     // 벽
+const int VISITED = 2;  // 방문한 길길
+
 int N, K, count = 0;
-int maze[MAX][MAX];
-bool visited[MAX][MAX];
-int dx[4] = {1, -1, 0, 0};
-int dy[4] = {0, 0, 1, -1};
+int maze[16][16];
+int offset[4][2] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
 void input() {
   cin >> N;
@@ -18,7 +19,7 @@ void input() {
   cin >> K;
 }
 
-void dfs(int x, int y, int length) {
+void findPath(int x, int y, int length) {
   // 도착 지점
   if (x == N - 1 && y == N - 1) {
     if (length <= K) {
@@ -31,23 +32,25 @@ void dfs(int x, int y, int length) {
     return;
   }
 
-  for (int i = 0; i < 4; i++) {
-    int nx = x + dx[i];
-    int ny = y + dy[i];
+  // 현재 위치 방문 처리
+  maze[x][y] = VISITED;
 
-    if (nx >= 0 && nx < N && ny >= 0 && ny < N && maze[nx][ny] == 0 &&
-        !visited[nx][ny]) {
-      visited[nx][ny] = true;   // 방문 처리
-      dfs(nx, ny, length + 1);  // 재귀 호출
-      visited[nx][ny] = false;  // 원상 복구
+  for (int dir = 0; dir < 4; dir++) {
+    int nx = x + offset[dir][0];
+    int ny = y + offset[dir][1];
+
+    if (nx >= 0 && nx < N && ny >= 0 && ny < N && maze[nx][ny] == PATHWAY) {
+      findPath(nx, ny, length + 1);
     }
   }
+
+  // 방문 해제제
+  maze[x][y] = PATHWAY;
 }
 
 int main() {
   input();
-  visited[0][0] = true;
-  dfs(0, 0, 0);
+  findPath(0, 0, 0);
 
   cout << count << endl;
   return 0;
