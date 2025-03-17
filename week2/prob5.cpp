@@ -49,8 +49,7 @@ void findPath(int x, int y, int rest, int direction) {
       isMoved = true;
 
       // 한 번 이동 후 휴식
-      int new_rest = rest + 1;
-      findPath(nx, ny, new_rest, dir);
+      findPath(nx, ny, rest + 1, dir);
     }
   }
   maze[x][y] = PATHWAY;  // 방문 해제
