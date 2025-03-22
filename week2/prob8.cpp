@@ -4,12 +4,12 @@ using namespace std;
 
 int N, W;  // 아이템 개수, 배낭 최대 무게
 int weights[16], values[16];
-int maxValue = 0;
+int max_value = 0;
 
 void knapsack(int index, int currentWeight, int currentValue) {
   // 모든 아이템을 확인한 경우
   if (index == N) {
-    maxValue = max(maxValue, currentValue);
+    max_value = max(max_value, currentValue);
     return;
   }
 
@@ -42,6 +42,6 @@ int main() {
   input();
 
   knapsack(0, 0, 0);
-  cout << maxValue << endl;
+  cout << max_value << endl;
   return 0;
 }
