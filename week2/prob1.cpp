@@ -24,7 +24,6 @@ int main() {
   cin >> K;
 
   int rank = 0;
-ㄱㄱㄱㄱㄱㄱㄱㄱ
   cout << findRank(0, rank) << endl;
   return 0;
 }
