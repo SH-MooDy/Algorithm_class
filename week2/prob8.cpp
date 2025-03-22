@@ -13,7 +13,7 @@ void knapsack(int index, int currentWeight, int currentValue) {
     return;
   }
 
-  // 현재 아이템 포함X => 다음 아이템으로 이동
+  // 현재 아이템 미포함 => 다음 아이템으로 이동
   knapsack(index + 1, currentWeight, currentValue);
 
   // 현재 아이템 포함 => 무게 제한 초과하지 않는다면 value 더해줌
