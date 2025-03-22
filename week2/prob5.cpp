@@ -20,6 +20,7 @@ void input() {
     }
   }
   infile >> K;
+  infile.close()
 }
 
 void findPath(int x, int y, int rest, int direction) {
