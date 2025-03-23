@@ -39,6 +39,7 @@ void findPath(int x, int y, int length) {
     int nx = x + offset[dir][0];
     int ny = y + offset[dir][1];
 
+    // 이동 가능한 범위인 경우
     if (nx >= 0 && nx < N && ny >= 0 && ny < N && maze[nx][ny] == PATHWAY) {
       findPath(nx, ny, length + 1);
     }

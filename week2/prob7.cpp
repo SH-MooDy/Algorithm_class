@@ -20,8 +20,8 @@ void findBinarySeq(int index, int num) {
   }
 
   // 해당 위치에 0 or 1 배치 후 리커젼
-  for (int i = 0; i < 2; i++) {
-    findBinarySeq(index + 1, i);
+  for (int n = 0; n < 2; n++) {
+    findBinarySeq(index + 1, n);
   }
 }
 
