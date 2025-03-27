@@ -1,3 +1,4 @@
+// bool 배열을 추가해서 해결하는 방법 찾아보기
 #include <iostream>
 using namespace std;
 
