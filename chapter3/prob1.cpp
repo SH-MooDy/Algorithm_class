@@ -30,7 +30,7 @@ void bubble_sort(vector<string> v) {
   }
   finish = clock();
 
-  double duration = finish - start / CLOCKS_PER_SEC;
+  double duration = finish - start / 1000;
 
   cout << duration << endl;
 }
