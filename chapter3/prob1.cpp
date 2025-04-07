@@ -1,55 +1,57 @@
-#include<iostream>
-#include<fstream>
-#include<vector>
-#include<time.h>
+#include <time.h>
+
+#include <fstream>
+#include <iostream>
+#include <vector>
 using namespace std;
 
-vector<string> input_file(){
-    vector<string> words;
-    ifstream infile("harry_full.txt");
-    string word;
-    while(infile >> word){
-        words.push_back(word);
+// 파일의 단어들을 불러오는 함수
+vector<string> input_file() {
+  vector<string> words;
+  ifstream infile("harry_full.txt");
+  string word;
+  while (infile >> word) {
+    words.push_back(word);
+  }
+  return words;
+}
+
+void bubble_sort(vector<string> v) {
+  int n = v.size();
+  clock_t start, finish;
+
+  start = clock();
+  for (int i = n; i > 0; i--) {
+    for (int j = 0; j < i - 1; j++) {
+      if (v[j] > v[j + 1]) {
+        swap(v[j], v[j + 1]);
+      }
     }
+  }
+  finish = clock();
 
-    // 중복 제거 => but, 정렬 시간 측정이 이 문제 목표라서, sort + unique 사용 불가
+  double duration = finish - start / CLOCKS_PER_SEC;
 
-    return words;
+  cout << duration << endl;
 }
 
-void bubble_sort(vector<string> v){
-    int n = v.size();
+void insertion_sort(vector<string> v) {}
 
-    for(int i = n; i > 0; i--){
-        for(int j = i; i < n-1; i++ ){
-            
-        }
-    }
-}
+void merge_sort(vector<string> v) {}
 
-void insertion_sort(vector<string> v){
-    
-}
+void quick_sort(vector<string> v) {}
 
-void merge_sort(vector<string> v){
+void heap_sort(vector<string> v) {}
 
-}
+void stdLibaray_sort(vector<string> v) {}
 
-void quick_sort(vector<string> v){
-
-}
-
-void heap_sort(vector<string> v){
-
-}
-
-void stdLibaray_sort(vector<string> v){
-
-}
-
-int main(){
-    vector<string> words = input_file();
-
-
-    return 0;
+int main() {
+  vector<string> words = input_file();
+  bubble_sort(words);
+  insertion_sort(words);
+  merge_sort(words);
+  quick_sort(words);
+  heap_sort(words);
+  stdLibaray_sort(words);
+  return 0;
 }
