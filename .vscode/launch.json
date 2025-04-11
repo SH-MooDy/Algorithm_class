@@ -33,8 +33,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/algorithm_class/chapter3",
-      "program": "d:/algorithm_class/chapter3/build/Debug/outDebug",
+      "cwd": "d:/Algorithm_class/chapter3",
+      "program": "d:/Algorithm_class/chapter3/build/Release/outRelease",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -32,12 +32,8 @@ void bubble_sort(vector<string> v) {
   }
   finish = clock();
 
-<<<<<<< HEAD
   double duration = (double)(finish - start) / CLOCKS_PER_SEC;
-=======
-  double duration = finish - start / 1000;
 
->>>>>>> 872348319a0bb5713e2057762937d0d42636d27d
   cout << duration << endl;
 }
 
@@ -48,14 +44,14 @@ void insertion_sort(vector<string> v) {
 
   start = clock();
   for (int i = 1; i < n; i++) {
-    string key = v[i];
+    string tmp = v[i];
     int j = i - 1;
 
-    while (j >= 0 && v[j] > key) {
+    while (j >= 0 && v[j] > tmp) {
       v[j + 1] = v[j];
       j--;
     }
-    v[j + 1] = key;
+    v[j + 1] = tmp;
   }
   finish = clock();
 
@@ -80,20 +76,21 @@ void merge(vector<string>& v, int left, int mid, int right) {
   for (int k = 0; k < temp.size(); ++k) v[left + k] = temp[k];
 }
 
-void merge_sort_rec(vector<string>& v, int left, int right) {
+// 합병
+void merge_sort(vector<string>& v, int left, int right) {
   if (left < right) {
     int mid = (left + right) / 2;
-    merge_sort_rec(v, left, mid);
-    merge_sort_rec(v, mid + 1, right);
+    merge_sort(v, left, mid);
+    merge_sort(v, mid + 1, right);
     merge(v, left, mid, right);
   }
 }
 
-void merge_sort(vector<string> v) {
+void merge(vector<string> v) {
   clock_t start, finish;
   start = clock();
 
-  merge_sort_rec(v, 0, v.size() - 1);
+  merge_sort(v, 0, v.size() - 1);
 
   finish = clock();
   double duration = (double)(finish - start) / CLOCKS_PER_SEC;
@@ -155,7 +152,9 @@ void heap_sort(vector<string> v) {
   clock_t start, finish;
   start = clock();
 
-  for (int i = n / 2 - 1; i >= 0; i--) heapify(v, n, i);
+  for (int i = n / 2 - 1; i >= 0; i--) {
+    heapify(v, n, i);
+  }
 
   for (int i = n - 1; i >= 0; i--) {
     swap(v[0], v[i]);
@@ -167,7 +166,7 @@ void heap_sort(vector<string> v) {
   cout << duration << endl;
 }
 
-// STL sort
+// STL 정렬
 void stdLibrary_sort(vector<string> v) {
   clock_t start, finish;
   start = clock();
@@ -184,7 +183,7 @@ int main() {
 
   bubble_sort(words);
   insertion_sort(words);
-  merge_sort(words);
+  merge(words);
   quick_sort(words);
   heap_sort(words);
   stdLibrary_sort(words);
