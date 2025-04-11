@@ -6,7 +6,8 @@
     "vector": "cpp",
     "xutility": "cpp",
     "ostream": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "*.tcc": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "terminal.integrated.scrollback": 10000,
