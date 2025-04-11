@@ -34,7 +34,7 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "d:/Algorithm_class/chapter3",
-      "program": "d:/Algorithm_class/chapter3/build/Release/outRelease",
+      "program": "d:/Algorithm_class/chapter3/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
