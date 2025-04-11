@@ -2,26 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(gdb) Windows 시작의 Bash",
+      "name": "C++ Launch with gdb (MSYS2)",
       "type": "cppdbg",
       "request": "launch",
-      "program": "프로그램 이름 입력(예: ${workspaceFolder}/a.exe)",
+      "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
       "environment": [],
-      "externalConsole": false,
-      "pipeTransport": {
-        "debuggerPath": "/usr/bin/gdb",
-        "pipeProgram": "${env:windir}\\system32\\bash.exe",
-        "pipeArgs": [
-          "-c"
-        ],
-        "pipeCwd": ""
-      },
+      "externalConsole": true,
+      "MIMode": "gdb",
+      "miDebuggerPath": "D:\\msys2\\mingw64\\bin\\gdb.exe",
       "setupCommands": [
         {
-          "description": "gdb 에 자동 서식 지정 사용",
+          "description": "Enable pretty-printing for gdb",
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
         },
@@ -32,7 +26,6 @@
         }
       ]
     },
-    {},
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -40,8 +33,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/algorithm_class/week2",
-      "program": "d:/algorithm_class/week2/build/Debug/outDebug",
+      "cwd": "d:/algorithm_class/chapter3",
+      "program": "d:/algorithm_class/chapter3/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
