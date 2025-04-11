@@ -32,7 +32,12 @@ void bubble_sort(vector<string> v) {
   }
   finish = clock();
 
+<<<<<<< HEAD
   double duration = (double)(finish - start) / CLOCKS_PER_SEC;
+=======
+  double duration = finish - start / 1000;
+
+>>>>>>> 872348319a0bb5713e2057762937d0d42636d27d
   cout << duration << endl;
 }
 
