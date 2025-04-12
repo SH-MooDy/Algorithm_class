@@ -5,7 +5,6 @@
 #include <vector>
 using namespace std;
 
-// 파일의 단어들을 불러오는 함수
 vector<string> input_file() {
   vector<string> words;
   ifstream infile("harry_full.txt");

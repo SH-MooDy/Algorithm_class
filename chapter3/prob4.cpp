@@ -10,7 +10,7 @@ struct Point {
   int x, y;  // x좌표, y좌표
 };
 
-// 우회전, 좌회전 계산
+// 우회전, 좌회전 계산 (양수면 반시계 방향, 음수면 시계 방향, 0이면 일직선)
 int crossProduct(const Point& O, const Point& A, const Point& B) {
   return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
 }
