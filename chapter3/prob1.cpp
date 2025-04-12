@@ -1,6 +1,5 @@
-#include <time.h>
-
 #include <algorithm>
+#include <ctime>
 #include <fstream>
 #include <iostream>
 #include <vector>
