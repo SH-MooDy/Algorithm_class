@@ -14,6 +14,14 @@ struct Node {
 int N;
 vector<int> node_list;
 
+for (int i = 0; i < N; ++i) {
+  int node, l, r;
+  cin >> node >> l >> r;
+  tree[node] = {l, r};
+  if (l != -1) isChild[l] = true;
+  if (r != -1) isChild[r] = true;
+}
+
 void inputFile() {
   ifstream infile("input1.txt");
   infile >> N;
@@ -47,13 +55,7 @@ vector<Node> tree(N);
 vector<bool> isChild(N, false);
 
 // 입력 처리
-for (int i = 0; i < N; ++i) {
-    int node, l, r;
-    cin >> node >> l >> r;
-    tree[node] = {l, r};
-    if (l != -1) isChild[l] = true;
-    if (r != -1) isChild[r] = true;
-}
+
 
 // 루트 찾기
 int root = -1;
