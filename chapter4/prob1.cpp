@@ -6,85 +6,77 @@ using namespace std;
 
 // 각 노드들의 정보를 저장하는 구조체
 struct Node {
-  int current;
   int right;
   int left;
 };
 
 int N;
-vector<int> node_list;
-
-for (int i = 0; i < N; ++i) {
-  int node, l, r;
-  cin >> node >> l >> r;
-  tree[node] = {l, r};
-  if (l != -1) isChild[l] = true;
-  if (r != -1) isChild[r] = true;
-}
+vector<Node> node_list;
+vector<bool> isChild;
 
 void inputFile() {
   ifstream infile("input1.txt");
   infile >> N;
 
+  node_list.assign(N, {-1, -1});
+  isChild.assign(N, false);
+
   for (int i = 0; i < N; i++) {
-    Node node;
-    infile >> node.current >> node.left >> node.right;
-    // 노드를 node_list 벡터에 저장
-    node_list.push_back(node);
+    int id, l, r;
+    infile >> id >> l >> r;
+    node_list[id].left = l;
+    node_list[id].right = r;
+
+    // 어떤 노드의 자식인지 기록
+    if (l != -1) {
+      isChild[l] = true;
+    }
+    if (r != -1) {
+      isChild[r] = true;
+    }
   }
 }
 
-void preOrder(Node node) {
-  cout << node.current << " ";
+void preOrder(int i) {
+  if (i == -1) return;
+  cout << i << " ";
+  preOrder(node_list[i].left);
+  preOrder(node_list[i].right);
+}
 
-  find()
+void inOrder(int i) {
+  if (i == -1) return;
+  inOrder(node_list[i].left);
+  cout << i << " ";
+  inOrder(node_list[i].right);
+}
+
+void postOrder(int i) {
+  if (i == -1) return;
+  postOrder(node_list[i].left);
+  postOrder(node_list[i].right);
+  cout << i << " ";
 }
 
 int main() {
   inputFile();
 
+  // 루트 찾기
+  int root = 0;
+  for (int i = 0; i < N; i++) {
+    if (!isChild[i]) {
+      root = i;
+      break;
+    }
+  }
+
+  preOrder(root);
+  cout << endl;
+
+  inOrder(root);
+  cout << endl;
+
+  postOrder(root);
+  cout << endl;
   return 0;
 }
-
-/**
- * struct Node {
-    int left, right;
-};
-
-vector<Node> tree(N);
-vector<bool> isChild(N, false);
-
-// 입력 처리
-
-
-// 루트 찾기
-int root = -1;
-for (int i = 0; i < N; ++i)
-    if (!isChild[i]) root = i;s
-
-// 순회 함수
-void preorder(int cur) {
-    if (cur == -1) return;
-    cout << cur << ' ';
-    preorder(tree[cur].left);
-    preorder(tree[cur].right);
-}
-void inorder(int cur) {
-    if (cur == -1) return;
-    inorder(tree[cur].left);
-    cout << cur << ' ';
-    inorder(tree[cur].right);
-}
-void postorder(int cur) {
-    if (cur == -1) return;
-    postorder(tree[cur].left);
-    postorder(tree[cur].right);
-    cout << cur << ' ';
-}
-
-// 호출
-preorder(root); cout << endl;
-inorder(root); cout << endl;
-postorder(root); cout << endl;
-
- */
