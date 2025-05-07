@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -15,11 +16,14 @@ void inputFile() {
 }
 
 // 트리의 높이를 구하는 함수
-void calHeight(int left, int right, int height) {
-  // 베이스 케이스
-  if (left >= right) {
-    cout << height + 1 << endl;
-    return;
+int calHeight(int left, int right) {
+  // 트리가 비어있는 경우
+  if (left > right) {
+    return 0;
+  }
+  // 높이가 1인경우
+  if (left == right) {
+    return 1;
   }
 
   // 후순위 배열에서 마지막 요소가 루트
@@ -35,24 +39,35 @@ void calHeight(int left, int right, int height) {
   for (int i = mid; i < right; i++) {
     // BST의 후순위 순열이 아닌경우
     if (nums[i] < root) {
-      cout << -1 << endl;
-      return;
+      return -1;
     }
   }
 
-  calHeight(left, mid - 1, height + 1);
-  calHeight(mid, right - 1, height + 1);
+  // 왼쪽 서브트리 높이 계산
+  int lh = calHeight(left, mid - 1);
+  if (lh == -1) {
+    return -1;
+  }
+
+  // 오른쪽 서브트리 높이 계산
+  int rh = calHeight(mid, right - 1);
+  if (rh == -1) {
+    return -1;
+  }
+
+  // 현재 트리 높이
+  return 1 + max(lh, rh);
 }
 
 int main() {
   inputFile();
-  calHeight(0, N - 1, 0);
+  int height = calHeight(0, N - 1);
+  cout << height << endl;
   return 0;
 }
 
 /**
  * 일단 기본적인 로직은 후순위 배열에서 가장 뒤에 오는 요소가 루트
- * 이 루트값을 기준으로 크냐 작냐에 따라서 배열을 계속 2개로 쪼갬
- * 여기서 배열을 둘로 쪼갤 수 없는 경우(한쪽이 공집합인 경우는 제외) BST가 아님
- * 둘로 쪼개는 횟수를 세면 트리의 높이를 구할 수 있지 않을까?
+ * 파티션 문제처럼 루트를 기준으로 배열을 두개로 나누기
+ * 리커젼으로 왼쪽, 오른쪽 각각의 높이를 구하면 가능하지 않을까?
  */
