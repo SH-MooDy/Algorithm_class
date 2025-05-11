@@ -38,12 +38,12 @@ class BST {
 
   // 한 사람 정보를 출력
   void print_info(Node* node) {
-    cout << node->data.name << endl;
-    cout << "   Company: " << node->data.company << endl;
-    cout << "   Address: " << node->data.address << endl;
-    cout << "   Zipcode: " << node->data.zipcode << endl;
-    cout << "   Phone: " << node->data.phone << endl;
-    cout << "   Email: " << node->data.email << endl;
+    cout << node->data.name << endl
+         << "   Company: " << node->data.company << endl
+         << "   Address: " << node->data.address << endl
+         << "   Zipcode: " << node->data.zipcode << endl
+         << "   Phone: " << node->data.phone << endl
+         << "   Email: " << node->data.email << endl;
   }
 
   // 트리를 중순위로 순회하면서 출력
@@ -68,14 +68,64 @@ class BST {
     return findByName(node->right, find_name);
   }
 
-  bool traceAndPrint(Node* node, string& name) {
-    if (!node) return false;
-    if (node->data.name == name || traceAndPrint(node->left, name) ||
-        traceAndPrint(node->right, name)) {
-      print_info(node);
-      return true;
+  // 중순위로 순회하며 저장
+  void saveInorder(Node* node, ofstream& outfile) {
+    if (!node) return;
+    saveInorder(node->left, outfile);
+
+    outfile << node->data.name << '\t' << node->data.company << '\t'
+            << node->data.address << '\t' << node->data.zipcode << '\t'
+            << node->data.phone << '\t' << node->data.email << '\n';
+
+    saveInorder(node->right, outfile);
+  }
+
+  // 삭제를 위한 메서드들
+  // 서브트리 최솟값을 반환
+  Node* minimum(Node* x) {
+    while (x->left) {
+      x = x->left;
     }
-    return false;
+    return x;
+  }
+
+  // u노드를 v노드로 대체
+  void transplant(Node* u, Node* v) {
+    if (u->parent == nullptr) {
+      root = v;
+    } else if (u == u->parent->left) {
+      u->parent->left = v;
+    } else {
+      u->parent->right = v;
+    }
+    if (v) {
+      v->parent = u->parent;
+    }
+  }
+
+  // 노드 삭제 로직
+  void eraseNode(Node* z) {
+    if (!z->left) {
+      // 왼쪽 자식인 없으면 오른쪽 자식으로 대체
+      transplant(z, z->right);
+    } else if (!z->right) {
+      // 오른쪽 자식이 없으면 왼쪽 자식으로 대체
+      transplant(z, z->left);
+    } else {
+      // 두자식이 모두 있는 경우
+      Node* y = minimum(z->right);  // 오른쪽 서브트리 최솟값
+      if (y->parent != z) {
+        // y를 y의 오른쪽 자식으로 대체
+        transplant(y, y->right);
+        y->right = z->right;  // z의 오른쪽을 y에 연결
+        y->right->parent = y;
+      }
+      // z를 y로 대체
+      transplant(z, y);
+      y->left = z->left;  // z의 왼쪽을 y에 연결
+      y->left->parent = y;
+    }
+    delete z;
   }
 
  public:
@@ -112,6 +162,7 @@ class BST {
     Node* node = findByName(root, name);
     if (node == nullptr) {
       cout << name << " does not exist" << endl;
+      return;
     }
     print_info(node);
   }
@@ -139,9 +190,40 @@ class BST {
 
   // 추적
   void trace(string& name) {
-    if (!traceAndPrint(root, name)) {
-      cout << name << "";
+    Node* cur = root;
+    while (cur) {
+      cout << cur->data.name << endl;
+      if (name == cur->data.name) {
+        return;
+      }
+
+      if (name < cur->data.name) {
+        cur = cur->left;
+      } else {
+        cur = cur->right;
+      }
     }
+    cout << name << " does not exist" << endl;
+  }
+
+  // 삭제
+  void remove(string& name) {
+    Node* z = findByName(root, name);
+    if (!z) {
+      cout << name << " does net exist" << endl;
+      return;
+    }
+    eraseNode(z);
+  }
+
+  // 저장
+  void save(string& fileName) {
+    ofstream outfile(fileName);
+
+    outfile << "name\tcompany_name\taddress\tzip\tphone\temail\n";  // 헤더부분
+    saveInorder(root, outfile);
+
+    outfile.close();
   }
 };
 
@@ -186,8 +268,6 @@ void readFile(string fileName, BST& bst) {
   infile.close();
 }
 
-void writeFile(string fileName, BST& bst) { ofstream outfile(fileName); }
-
 int main() {
   BST address_list;
   string input, command, arg;
@@ -209,14 +289,17 @@ int main() {
     } else if (command == "add") {
       // 중복검사
       if (address_list.find(arg) != nullptr) {
-        cout << arg << " already exists\n";
+        cout << arg << " already exists" << endl;
         continue;
       }
       // 추가
       address_list.add(arg);
     } else if (command == "trace") {
+      address_list.trace(arg);
     } else if (command == "delete") {
+      address_list.remove(arg);
     } else if (command == "save") {
+      address_list.save(arg);
     }
   }
 
