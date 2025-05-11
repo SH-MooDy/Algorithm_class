@@ -13,7 +13,8 @@
     "string": "cpp",
     "string_view": "cpp",
     "span": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "istream": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "terminal.integrated.scrollback": 10000,
